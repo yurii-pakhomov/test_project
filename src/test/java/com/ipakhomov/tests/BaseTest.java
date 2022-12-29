@@ -16,6 +16,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--lang=en-US");
         driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
     }
 
     @AfterTest
