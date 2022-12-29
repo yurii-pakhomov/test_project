@@ -8,22 +8,31 @@ import org.reflections.scanners.Scanners;
 import org.testng.annotations.Test;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Set;
 
 @Slf4j
 public class TestMethodCollector {
 
-    @SneakyThrows
     public static void main(String[] args) {
+        String[] testMethodNames = getTestMethodNames();
+        log.info("Found {} test method(s): {}", testMethodNames.length, testMethodNames);
+        writeMethodNamesToFile(testMethodNames);
+    }
+
+    private static String[] getTestMethodNames() {
         Set<Method> methodsWithTestAnnotation = new Reflections("com.ipakhomov", Scanners.MethodsAnnotated)
                 .getMethodsAnnotatedWith(Test.class);
-        String[] methods = methodsWithTestAnnotation.stream()
+        return methodsWithTestAnnotation.stream()
                 .map(Method::getName)
                 .toArray(String[]::new);
-        log.info("Found {} test method(s): {}", methods.length, methods);
+    }
+
+    @SneakyThrows
+    private static void writeMethodNamesToFile(String[] testMethodNames) {
         try (CSVWriter writer = new CSVWriter(new FileWriter("test_methods.csv"))) {
-            writer.writeNext(methods);
+            writer.writeNext(testMethodNames);
         }
     }
 }
