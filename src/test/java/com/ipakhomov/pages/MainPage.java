@@ -17,7 +17,6 @@ public class MainPage {
     private By dateField = By.className("xp__dates");
     private String dayOfMonthXpath = "//td[@data-date='%s']";
 
-
     public SearchResultPage clickSearchButton() {
         driver.findElement(searchButton).click();
         return new SearchResultPage(driver);
@@ -28,7 +27,7 @@ public class MainPage {
     }
 
     public void setCheckInAndCheckOut(LocalDate checkInDate, LocalDate checkOutDate) {
-        if (!isElementDisplayed(nextButtonOnCalendar)) {
+        if (!isCalendarDisplayed()) {
             driver.findElement(dateField).click();
         }
         while (!isNeededMonthDisplayed(checkInDate)) {
@@ -44,7 +43,7 @@ public class MainPage {
                         && month.getText().toLowerCase().contains(String.valueOf(date.getYear())));
     }
 
-    private boolean isElementDisplayed(By by) {
-        return driver.findElement(by).isDisplayed();
+    private boolean isCalendarDisplayed() {
+        return driver.findElement(nextButtonOnCalendar).isDisplayed();
     }
 }
