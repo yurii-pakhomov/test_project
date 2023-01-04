@@ -17,11 +17,12 @@
         <lombok.version>1.18.24</lombok.version>
         <assertj-core.version>3.23.0</assertj-core.version>
         <awaitility.version>4.2.0</awaitility.version>
-        <webdrivermanager.version>5.3.0</webdrivermanager.version>
+        <webdrivermanager.version>5.3.1</webdrivermanager.version>
         <testng.version>7.7.0</testng.version>
         <reflection.version>0.10.2</reflection.version>
         <opencsv.version>5.7.1</opencsv.version>
         <log4j-simple.version>1.7.36</log4j-simple.version>
+        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
     </properties>
 
     <dependencies>
@@ -61,6 +62,7 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -90,7 +92,7 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.1</version>
+                    <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <suiteXmlFiles>
                             <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>

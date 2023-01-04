@@ -14,7 +14,7 @@ public class SearchTest extends BaseTest {
         LocalDate checkInDate = LocalDate.parse("2023-06-01");
         LocalDate checkOutDate = LocalDate.parse("2023-06-30");
         MainPage mainPage = new MainPage(driver);
-        driver.get("https://www.booking.com");
+        driver.get(configFile.getApplicationUrl());
         mainPage.setCityNameInSearch(cityName);
         mainPage.setCheckInAndCheckOut(checkInDate, checkOutDate);
         SearchResultPage searchResultPage = mainPage.clickSearchButton();
