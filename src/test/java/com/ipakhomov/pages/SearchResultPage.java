@@ -15,16 +15,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SearchResultPage {
     private final WebDriver driver;
 
-    private By resultAddress = By.xpath("//span[@data-testid='address']");
-    private By checkInDateValue = By.xpath("//button[@data-testid='date-display-field-start']");
-    private By checkOutDateValue = By.xpath("//button[@data-testid='date-display-field-end']");
-    private By dateFieldIcon = By.xpath("//div[@data-testid='date-display-field-date-in-icon']");
+    private By resultAddress = By.cssSelector("[data-testid='address']");
+    private By checkInDateValue = By.cssSelector("[data-testid='date-display-field-start']");
+    private By checkOutDateValue = By.cssSelector("[data-testid='date-display-field-end']");
+    private By dateFieldIcon = By.cssSelector("[data-testid='date-display-field-date-in-icon']");
 
     public void allResultsHaveCorrectCityName(String cityName) {
         List<WebElement> addresses = driver.findElements(resultAddress);
-        addresses.forEach(address -> {
-            assertThat(address.getText()).contains(cityName);
-        });
+        addresses.forEach(address -> assertThat(address.getText()).contains(cityName));
     }
 
     public void checkInAndCheckOutDatesAreCorrectOnSearchResultPage(LocalDate expectedCheckInDate, LocalDate expectedCheckOutDate) {
